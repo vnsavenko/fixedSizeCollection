@@ -1,14 +1,14 @@
 package com.savenko.mycollection;
 
-public class Test {
+public class TestInt {
     public static void main(String[] args) {
-        FIxedSizeCollection col = new FIxedSizeCollection(5);
+        FixedSizeCollection col = new FixedSizeCollection(5);
 
-        col.add(5);
         col.add(10);
-        col.add(15);
         col.add(20);
-        col.add(25);
+        col.add(30);
+        col.add(40);
+        col.add(50);
 
         print(col);
 
@@ -18,9 +18,9 @@ public class Test {
 
         System.out.println("Коллекция после добавления элементов: ");
 
-        col.add(30);
-        col.add(400);
-        col.add(500);
+        col.add(100);
+        col.add(200);
+        col.add(300);
         print(col);
 
 
@@ -29,12 +29,16 @@ public class Test {
         col.delete(k);
         print(col);
 
+        col.add(500);
+
+        print(col);
+
 
 
 
     }
 
-    private static  void print(FIxedSizeCollection col){
+    private static  void print(FixedSizeCollection col){
         for (int i = 0; i < col.size(); i++) System.out.print(col.getElem(i) + " ");
         System.out.println();
     }
