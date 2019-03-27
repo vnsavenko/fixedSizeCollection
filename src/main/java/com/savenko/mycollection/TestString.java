@@ -26,19 +26,16 @@ public class TestString {
         print(col);
 
 
-        int k = 4;
+        int k = 2;
         System.out.println("Коллекция после удаления " + k + "-го элемента: " );
         col.delete(k);
+
         print(col);
         col.add("Val");
 
         System.out.println("Коллекция после добавления элементов: ");
         print(col);
-
-
-
-
-    }
+}
 
     private static  void print(FixedSizeCollection col){
         for (int i = 0; i < col.size(); i++) System.out.print(col.getElem(i) + " ");

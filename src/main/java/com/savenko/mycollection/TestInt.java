@@ -1,9 +1,12 @@
 package com.savenko.mycollection;
 
+import java.util.ArrayList;
+
 public class TestInt {
     public static void main(String[] args) {
         FixedSizeCollection col = new FixedSizeCollection(5);
 
+        ArrayList al = new ArrayList();
         col.add(10);
         col.add(20);
         col.add(30);

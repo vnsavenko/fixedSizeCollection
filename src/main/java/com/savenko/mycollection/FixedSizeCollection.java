@@ -1,44 +1,53 @@
 package com.savenko.mycollection;
 
+import javax.xml.bind.annotation.XmlType;
+
 public class FixedSizeCollection<E> {
-    private E a[];
+    private E data[];
+    private static final int DEFAULT_CAPACITY = 16;
     private int tos = -1;//указатель на позицию перед элементом с индексом tos+1
 
 
 
     public FixedSizeCollection(int size) {
-        a = (E[]) new Object[size];
+        if (size > 0) {data = (E[]) new Object[size];}
+        else if (size == 0){data = (E[]) new Object[DEFAULT_CAPACITY];}
+        else {
+            throw new IllegalArgumentException("Illegal Capacity: "+
+                    size);
+        }
+    }
+    public FixedSizeCollection() {
+
+        this.data = (E[]) new Object[DEFAULT_CAPACITY];
     }
 
-    public FixedSizeCollection() {
-        this.a = (E[]) new Object[16];
-    }
 
     public int size(){
-        return a.length;
+        return data.length;
     }
 
     public void add(E elem){
-        if (tos==a.length-1){
+        if (tos==data.length-1){
             shift();
         }
-            a[++tos] = elem;
+            data[++tos] = elem;
         }
 
     public E getElem(int i){
-        return a[i];
+        return data[i];
         }
 
         public E getElem(){
-        return a[tos];
+        return data[tos];
         }
 
         public void delete(int k){
-        if (k > a.length-1) throw new ArrayIndexOutOfBoundsException();
-            for (int i = k; i < a.length-1; i++) {
-                a[i] = a[i+1]; // перезаписываем элементы с индекса удаленного элемента
+        if (k > data.length-1) throw new ArrayIndexOutOfBoundsException();
+            for (int i = k; i < data.length-1; i++) {
+                data[i] = data[i+1]; // перезаписываем элементы с индекса удаленного элемента
             }
-            a[a.length-1] = null; // удаляем последний элемент
+            data[data.length-1] = null; // удаляем последний элемент
             --tos; // сдвигаем указатель на последний элемент
         }
 
@@ -46,10 +55,10 @@ public class FixedSizeCollection<E> {
     private void shift() {
         --tos;
         //int b[] = new int[a.length]; так работает
-        for (int i = 0; i < a.length-1; i++) {
+        for (int i = 0; i < data.length-1; i++) {
           //  b[i] = a[i+1];
            // a[i] = b[i];
-            a[i] = a[i+1];// так тоже работает
+            data[i] = data[i+1];// так тоже работает
 
 
         }
