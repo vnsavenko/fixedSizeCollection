@@ -1,10 +1,15 @@
 package com.savenko.mycollection;
 
+import java.sql.SQLOutput;
+
 public class TestString {
 
 
     public static void main(String[] args) {
-        FixedSizeCollection<String> col = new FixedSizeCollection(5);
+        FixedSizeCollection<String> col = null;
+        try {
+            col = new FixedSizeCollection(5);
+
 
         col.add("John");
         col.add("Mary");
@@ -35,7 +40,14 @@ public class TestString {
 
         System.out.println("Коллекция после добавления элементов: ");
         print(col);
-}
+
+
+        } catch (CollectionException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+    }
 
     private static  void print(FixedSizeCollection col){
         for (int i = 0; i < col.size(); i++) System.out.print(col.getElem(i) + " ");

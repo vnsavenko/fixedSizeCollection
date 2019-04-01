@@ -13,10 +13,11 @@ public class FixedSizeCollection<E> {
         if (size > 0) {data = (E[]) new Object[size];}
         else if (size == 0){data = (E[]) new Object[DEFAULT_CAPACITY];}
         else {
-            throw new IllegalArgumentException("Illegal Capacity: "+
-                    size);
+            throw new CollectionException("Неверная инициализация, размер не может быть отрицательным: " + size);
         }
     }
+
+
     public FixedSizeCollection() {
 
         this.data = (E[]) new Object[DEFAULT_CAPACITY];
@@ -27,7 +28,9 @@ public class FixedSizeCollection<E> {
         return data.length;
     }
 
-    public void add(E elem){
+    public void add(E elem) {
+        if(data == null) throw new CollectionException("Коллекция не инициализирована");
+
         if (tos==data.length-1){
             shift();
         }
@@ -35,7 +38,10 @@ public class FixedSizeCollection<E> {
         }
 
     public E getElem(int i){
-        return data[i];
+        if (!(i < 0)&&(i < data.length)){
+            return data[i];
+        } else throw new CollectionException("Индекс элемента выходит за пределы коллекции");
+
         }
 
         public E getElem(){
@@ -43,7 +49,7 @@ public class FixedSizeCollection<E> {
         }
 
         public void delete(int k){
-        if (k > data.length-1) throw new ArrayIndexOutOfBoundsException();
+        if ((k < 0)||(k > data.length-1)) throw new CollectionException("Индекс элемента выходит за пределы коллекции");
             for (int i = k; i < data.length-1; i++) {
                 data[i] = data[i+1]; // перезаписываем элементы с индекса удаленного элемента
             }
